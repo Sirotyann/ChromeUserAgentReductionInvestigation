@@ -1,0 +1,48 @@
+<!Doctype html>
+<html>
+
+<head>
+
+</head>
+
+<body>
+    <div id="main">
+        <div><input id="userAgentInput" type="text"/><button id="transformButton" style="margin-left: 10px">Transform</button></div>
+        <hr/>
+        <div><span>original: </span><span id="original"></span></div>
+        <hr/>
+        <div><span>reduced : </span><span id="reduced"></span></div>
+    </div>
+    <script type="text/javascript">
+        function reduceAgent(agent) {
+            const chromeUAs = /^Mozilla\/5\.0 \(((?<platform>Lin|Win|Mac|X11; C|X11; L)+[^\)]+)\) AppleWebKit\/537.36 \(KHTML, like Gecko\) Chrome\/(?<major>\d+)[\d\.]+(?<mobile>[ Mobile]*) Safari\/537\.36$/;
+            const matched = chromeUAs.exec(agent);
+
+            if (matched) {
+                const unifiedPlatform = {
+                    'Lin': 'Linux; Android 10; K',
+                    'Win': 'Windows NT 10.0; Win64; x64',
+                    'Mac': 'Macintosh; Intel Mac OS X 10_15_7',
+                    'X11; C': 'X11; CrOS x86_64',
+                    'X11; L': 'X11; Linux x86_64',
+                };
+
+                return `Mozilla/5.0 (${unifiedPlatform[matched.groups.platform]}) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/${matched.groups.major}.0.0.0${matched.groups.mobile} Safari/537.36`;
+            }
+        }
+
+        const reducedAgent = reduceAgent(navigator.userAgent);
+        document.getElementById("original").innerText = navigator.userAgent;
+        document.getElementById("reduced").innerText = reducedAgent;
+
+        document.getElementById("transformButton").addEventListener('click', () => {
+            const str = document.getElementById('userAgentInput').value;
+            console.log(str)
+            console.log(reduceAgent(str))
+            document.getElementById("original").innerText = str;
+            document.getElementById("reduced").innerText = reduceAgent(str);
+        });
+    </script>
+</body>
+
+</html>
