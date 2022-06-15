@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Accept-CH" content="Sec-CH-UA-Full-Version, Device-Memory, Viewport-Width" />
+        <style>
+            #board {
+                font-family: sans-serif;
+                padding: 20px;
+            }
+
+            #board > div {
+                line-height: 40px;
+                display: flex;
+                border-bottom: 1px solid #dcdcdc;
+            }
+
+            #board label {
+                width: 200px;
+                color: #666;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- ch-ua-full-version -->
+        <!-- <meta http-equiv='Accept-CH' content='Sec-CH-UA-Arch, Device-Memory, Viewport-Width, Sec-CH-UA-Full-Version' /> -->
+        <h1>Accept-CH in iframe</h1>
+        <iframe src="/iframe_src_content" allow="ch-ua-full-version; ch-ua-model; device-memory"></iframe>
+    </body>
+</html>
